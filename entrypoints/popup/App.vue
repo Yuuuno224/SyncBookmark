@@ -10,6 +10,14 @@ const buttons = [
   { label: '导入', name: 'import' },
   { label: '导出', name: 'export' }
 ]
+const handleSettingClick = async () => {
+  try {
+    console.log('正在打开options页');
+    await browser.runtime.openOptionsPage();
+  } catch {
+    console.log('打开options页失败');
+  }
+}
 </script>
 
 <template>
@@ -47,7 +55,7 @@ const buttons = [
 
     <el-footer class="footer">
       <el-row justify="space-between" align="middle">
-        <el-icon :size="20">
+        <el-icon :size="20" @click="handleSettingClick" class="hover-icon">
           <Setting />
         </el-icon>
         <el-link underline target="_blank" href="https://github.com/Yuuuno224/SyncBookmark">
@@ -101,5 +109,12 @@ const buttons = [
   width: 100%;
   height: 0;
   border-bottom: 1px solid var(--el-border-color);
+}
+
+/* 添加悬停样式 */
+.hover-icon:hover {
+  color: #409eff;
+  /* 与 el-link 悬停颜色一致 */
+  cursor: pointer;
 }
 </style>

@@ -19,4 +19,10 @@ export default defineConfig({
       }),
     ],
   }),
+  manifest: {
+    options_ui: {
+      page: '/options/options.html',
+      open_in_tab: true
+    }
+  }
 });
