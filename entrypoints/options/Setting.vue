@@ -1,19 +1,18 @@
 <script lang="ts" setup>
 import { useDark, useToggle } from '@vueuse/core'
-import { Sunny, Moon, Setting } from '@element-plus/icons-vue'
-
+import { Sunny, Moon } from '@element-plus/icons-vue'
+import { ref } from 'vue'
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
-const buttons = [
-  { label: '上传', name: 'upload' },
-  { label: '下载', name: 'download' },
-  { label: '导入', name: 'import' },
-  { label: '导出', name: 'export' }
-]
+const formData = ref({
+  githubToken: "",
+  gistId: "",
+  GistFileName: ""
+})
 
-const handleClick = (buttonName: string) => {
-  console.log('点击了:', buttonName)
+const onSave = () => {
+  console.log("保存")
 }
 </script>
 
@@ -31,13 +30,21 @@ const handleClick = (buttonName: string) => {
 
     <el-main>
       <!-- 主要内容区域 -->
-      <el-row :gutter="10">
-        <el-col :span="24" v-for="button in buttons" @click="handleClick(button.name)">
-          <el-button size="large" style="width: 100%" :key="button.name">
-            {{ button.label }}
-          </el-button>
-        </el-col>
-      </el-row>
+
+      <el-form>
+        <el-form-item label="Github Token">
+          <el-input v-model="formData.githubToken" type="password"></el-input>
+        </el-form-item>
+        <el-form-item label="Gist ID">
+          <el-input v-model="formData.gistId"></el-input>
+        </el-form-item>
+        <el-form-item label="Gist 文件名">
+          <el-input v-model="formData.GistFileName"></el-input>
+        </el-form-item>
+        <el-form-item style="justify-self: center;">
+          <el-button @click="onSave">保存</el-button>
+        </el-form-item>
+      </el-form>
     </el-main>
   </el-container>
 </template>
